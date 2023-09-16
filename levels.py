@@ -8,8 +8,6 @@ class LVL1():
 
   def __init__(self, WINDOW):
     self.WINDOW = WINDOW
-
-  def setUpLevel1(self):
     self.WINDOW.fill(Constants.BG_COLOR)
 
     # Setup background
@@ -17,9 +15,19 @@ class LVL1():
     self.WINDOW.blit(self.bg, (0, 0))
 
     # Load Objects
-    bedObj = level1objects.Bed(self.WINDOW)
-    toiletObj = level1objects.Toilet(self.WINDOW)
-    keyObj = level1objects.Key(self.WINDOW)
+    self.bedObj = level1objects.Bed(self.WINDOW)
+    self.toiletObj = level1objects.Toilet(self.WINDOW)
+    self.keyObj = level1objects.Key(self.WINDOW)
+
+    while True:
+      for event in pygame.event.get():
+        if event.type == QUIT:
+          pygame.quit()
+          sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+          self.bedObj.whenClicked()
+      pygame.display.update()
+      Constants.fpsClock.tick(Constants.FPS)
 
 
 class LVL2():

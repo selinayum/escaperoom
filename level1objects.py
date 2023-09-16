@@ -19,8 +19,10 @@ class Bed():
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
 
-  def whenClicked():
-    pass
+  def whenClicked(self):
+    if check_collision(pygame.mouse.get_pos()):
+      print("moved the bed")
+
 
 class Toilet():
   def __init__(self, WINDOW):

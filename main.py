@@ -12,10 +12,6 @@ class Game():
 
     self.playing = False
     self.currentLevel = 0
-
-    level1 = levels.LVL1(self.WINDOW)
-    level2 = levels.LVL2(self.WINDOW)
-    level3 = levels.LVL3(self.WINDOW)
     
     while not self.playing:
       self.displayText(self.WINDOW, "Choose Your Level", 50, 30,
@@ -28,6 +24,8 @@ class Game():
                        Constants.TEXT_COLOR)
       self.displayText(self.WINDOW, "3) Level 3", 310, 20,
                        Constants.TEXT_COLOR)
+      pygame.display.update()
+      Constants.fpsClock.tick(Constants.FPS)
 
       for event in pygame.event.get():
         if event.type == QUIT:
@@ -35,19 +33,21 @@ class Game():
           sys.exit()
         if event.type == pygame.KEYDOWN:
           if event.unicode == "1":
-            level1.setUpLevel1()
+            level1 = levels.LVL1(self.WINDOW)
             self.currentLevel = 1
             self.playing = True
             
           if event.unicode == "2":
+            level2 = levels.LVL2(self.WINDOW)
             print("2")
             self.currentLevel = 2
           if event.unicode == "3":
+            level3 = levels.LVL3(self.WINDOW)
             print("3")
             self.currentLevel = 3
 
-        level1.setUpLevel1()
-        self.playing = True
+
+
 
   def displayText(self, screen, msg, y, size, color):
     font = pygame.font.Font("font.ttf", size + 10)
@@ -61,11 +61,5 @@ class Game():
 
 gameObj = Game()
 
-while True:
-  for event in pygame.event.get():
-    if event.type == QUIT:
-      pygame.quit()
-      sys.exit()
-  pygame.display.update()
-  Constants.fpsClock.tick(Constants.FPS)
+
 
