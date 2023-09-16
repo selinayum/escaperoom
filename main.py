@@ -62,10 +62,6 @@ class Game():
 gameObj = Game()
 
 while True:
-  for event in pygame.event.get():
-    if event.type == QUIT:
-      pygame.quit()
-      sys.exit()
   pygame.display.update()
   Constants.fpsClock.tick(Constants.FPS)
 
