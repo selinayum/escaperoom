@@ -26,6 +26,7 @@ class LVL1():
           sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
           self.bedObj.whenClicked()
+          self.toiletObj.whenClicked()
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 
