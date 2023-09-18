@@ -4,26 +4,27 @@ import Constants
 import levels
 
 class Bed():
-  def __init__(self, WINDOW):
+  def __init__(self, WINDOW,level,x=380,y=60):
     self.WINDOW = WINDOW
-    self.x = 380
+    self.level = level
+    self.x = x
     self.bed = pygame.image.load("./Objects_Level_1/bed.png")
     self.bed = pygame.transform.scale(self.bed, (400,400))
     self.rect = pygame.Rect(self.x + 100,200,250,200)
-    
+    self.y = y
 
     self.colliding = False
-    self.WINDOW.blit(self.bed, (self.x,60))
+    self.WINDOW.blit(self.bed, (self.x,self.y))
 
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
 
   def whenClicked(self):
-    if check_collision(pygame.mouse.get_pos()):
+    if self.check_collision(pygame.mouse.get_pos()):
       print("moved the bed")
-
-
+      self.level.movebed(self.WINDOW)
+      pygame.display.update()
 class Toilet():
   def __init__(self, WINDOW):
     self.WINDOW = WINDOW
@@ -32,7 +33,7 @@ class Toilet():
     self.toilet = pygame.transform.scale(self.toilet, (300,300))
 
     self.WINDOW.blit(self.toilet, (10,160))
-
+    pygame.display.update()
   def whenClicked():
     pass
     

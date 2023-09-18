@@ -15,7 +15,7 @@ class LVL1():
     self.WINDOW.blit(self.bg, (0, 0))
 
     # Load Objects
-    self.bedObj = level1objects.Bed(self.WINDOW)
+    self.bedObj = level1objects.Bed(self.WINDOW,self)
     self.toiletObj = level1objects.Toilet(self.WINDOW)
     self.keyObj = level1objects.Key(self.WINDOW)
 
@@ -29,6 +29,18 @@ class LVL1():
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 
+  def movebed(self, WINDOW):
+    self.WINDOW = WINDOW
+    self.WINDOW.fill(Constants.BG_COLOR)
+
+    # Setup background
+    self.bg = pygame.image.load("./bgs/bg1.png")
+    self.WINDOW.blit(self.bg, (0, 0))
+
+    # Load Objects
+    self.bedObj = level1objects.Bed(self.WINDOW, self,380+60,60)
+    self.toiletObj = level1objects.Toilet(self.WINDOW)
+    self.keyObj = level1objects.Key(self.WINDOW)
 
 class LVL2():
 
