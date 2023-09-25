@@ -22,7 +22,6 @@ class Bed():
 
   def whenClicked(self):
     if self.check_collision(pygame.mouse.get_pos()):
-      print("moved the bed")
       self.level.movebed(self.WINDOW)
       pygame.display.update()
 class Toilet():
@@ -34,6 +33,7 @@ class Toilet():
     self.toilet = pygame.transform.scale(self.toilet, (300,300))
     self.toilet1 = pygame.transform.scale(self.toilet1, (300, 300))
     self.rect = pygame.Rect(self.x + 100, 200, 250, 200)
+    self.open = False
 
     self.WINDOW.blit(self.toilet, (10,160))
     pygame.display.update()
@@ -45,6 +45,7 @@ class Toilet():
   def whenClicked(self):
     if self.check_collision(pygame.mouse.get_pos()):
       self.WINDOW.blit(self.toilet1, (10, 160))
+      self.open = True
       pygame.display.update()
     
 class Key():
@@ -52,5 +53,7 @@ class Key():
     self.WINDOW = WINDOW
     self.key = pygame.image.load("./Objects_Level_1/key.png")
 
-  def whenClicked():
-    pass
+  def checkToilet(self, Toilet):
+    if Toilet.open == True:
+      self.WINDOW.blit(self.key, (140, 305))
+      pygame.display.update()
