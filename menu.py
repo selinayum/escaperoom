@@ -8,6 +8,7 @@ class Main_menu():
     self.currentLevel = 0
     self.playing = False
     self.WINDOW = WINDOW
+
   def main_menu(self):
 
     self.displayText(self.WINDOW, "Choose Your Level", 50, 30,
@@ -30,8 +31,10 @@ class Main_menu():
       if event.type == pygame.KEYDOWN:
         if event.unicode == "1":
           level1 = levels.LVL1(self.WINDOW)
+          level1.onlevel = True
           self.currentLevel = 1
           self.playing = True
+
 
         if event.unicode == "2":
           level2 = levels.LVL2(self.WINDOW)

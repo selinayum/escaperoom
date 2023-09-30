@@ -18,17 +18,21 @@ class LVL1():
     self.bedObj = level1objects.Bed(self.WINDOW,self)
     self.toiletObj = level1objects.Toilet(self.WINDOW)
     self.keyObj = level1objects.Key(self.WINDOW)
+    self.onlevel = True
 
-    while True:
+    while self.onlevel:
       for event in pygame.event.get():
         if event.type == QUIT:
           pygame.quit()
           sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
+          if self.keyObj.whenClicked(self.toiletObj):
+            self.onlevel = False
+            self.WINDOW.fill(Constants.BG_COLOR)
+            break
           self.bedObj.whenClicked()
           self.toiletObj.whenClicked()
           self.keyObj.checkToilet(self.toiletObj)
-          self.keyObj.whenClicked()
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 

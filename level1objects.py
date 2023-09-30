@@ -56,12 +56,14 @@ class Key():
     self.rect = pygame.Rect(self.x + 120, 300, 50, 50)
     self.WINDOW = WINDOW
     self.key = pygame.image.load("./Objects_Level_1/key.png")
-  def whenClicked(self):
-    if self.check_collision(pygame.mouse.get_pos()):
+  def whenClicked(self, TOILET):
+    if self.check_collision(pygame.mouse.get_pos()) and TOILET.open == True:
       self.WINDOW.fill(Constants.WHITE)
       main_menu_obj = Main_menu(self.WINDOW)
+      self.WINDOW.fill(Constants.BG_COLOR)
       main_menu_obj.main_menu()
-
+      return True
+    return False
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
