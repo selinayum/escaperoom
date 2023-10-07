@@ -90,3 +90,17 @@ class spoon():
     self.y = y
     self.colliding = False
     # self.WINDOW.blit(self.spoon, (self.x, self.y))
+  def check_collision(self, mouse_pos):
+    self.colliding = self.rect.collidepoint(mouse_pos)
+    return self.colliding
+  def whenClicked(self,box):
+    if self.check_collision(pygame.mouse.get_pos()) and box.open == True:
+      print("you have the spoon!")
+      return True
+    else:
+      print("you already have the spoon!")
+      return False
+  def check_box(self,box):
+    if box.open == True:
+      self.WINDOW.blit(self.spoon, (self.x, self.y))
+      pygame.display.update

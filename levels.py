@@ -75,7 +75,10 @@ class LVL2():
           pygame.quit()
           sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
+          if self.spoonObj.whenClicked(self.boxObj):
+            print("You clicked me!")
           self.boxObj.whenClicked()
+          self.spoonObj.check_box(self.boxObj)
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 
