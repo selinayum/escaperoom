@@ -54,3 +54,28 @@ class carpet():
     self.y = y
     self.colliding = False
     self.WINDOW.blit(self.carpet, (self.x, self.y))
+
+
+class ghost():
+  def __init__(self, WINDOW,level,x=30,y=250):
+    self.WINDOW = WINDOW
+    self.level = level
+    self.x = x
+    self.ghost = pygame.image.load("./Objects_Level_2/ghost.png")
+    self.ghost = pygame.transform.scale(self.ghost, (200,200))
+    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.y = y
+    self.colliding = False
+    self.WINDOW.blit(self.ghost, (self.x, self.y))
+
+class picture():
+  def __init__(self, WINDOW,level,x=550,y=120):
+    self.WINDOW = WINDOW
+    self.level = level
+    self.x = x
+    self.picture = pygame.image.load("./Objects_Level_2/picture.png")
+    self.picture = pygame.transform.scale(self.picture, (200,200))
+    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.y = y
+    self.colliding = False
+    self.WINDOW.blit(self.picture, (self.x, self.y))

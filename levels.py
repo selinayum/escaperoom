@@ -63,10 +63,10 @@ class LVL2():
   # Load Objects
     self.boxObj = level2objects.box(self.WINDOW,self)
     self.carpetObj = level2objects.carpet(self.WINDOW,self)
-    # self.ghostObj = level2objects.ghost(self.WINDOW)
-    # self.pictureObj = level2objects.picture(self.WINDOW)
-    # self.scissorsObj = level2objects.scissors(self.WINDOW)
-    # self.spoonObj = level2objects.spoon(self.WINDOW)
+    self.ghostObj = level2objects.ghost(self.WINDOW,self)
+    self.pictureObj = level2objects.picture(self.WINDOW,self)
+    # self.scissorsObj = level2objects.scissors(self.WINDOW,self)
+    # self.spoonObj = level2objects.spoon(self.WINDOW,self)
     self.onlevel = True
 
     while self.onlevel:
