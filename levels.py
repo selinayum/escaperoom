@@ -65,8 +65,8 @@ class LVL2():
     self.carpetObj = level2objects.carpet(self.WINDOW,self)
     self.ghostObj = level2objects.ghost(self.WINDOW,self)
     self.pictureObj = level2objects.picture(self.WINDOW,self)
-    # self.scissorsObj = level2objects.scissors(self.WINDOW,self)
-    # self.spoonObj = level2objects.spoon(self.WINDOW,self)
+    self.scissorsObj = level2objects.scissors(self.WINDOW,self)
+    self.spoonObj = level2objects.spoon(self.WINDOW,self)
     self.onlevel = True
 
     while self.onlevel:
@@ -74,8 +74,12 @@ class LVL2():
         if event.type == QUIT:
           pygame.quit()
           sys.exit()
-
+        if event.type == pygame.MOUSEBUTTONDOWN:
+          self.boxObj.whenClicked()
       pygame.display.update()
+      Constants.fpsClock.tick(Constants.FPS)
+
+
   def setUpLevel2(self):
     self.WINDOW.fill(Constants.BG_COLOR)
 

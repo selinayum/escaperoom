@@ -10,10 +10,12 @@ class box():
     self.level = level
     self.x = x
     self.box = pygame.image.load("./Objects_Level_2/box.png")
+    self.openbox = pygame.image.load("./Objects_Level_2/openbox.png")
     self.box = pygame.transform.scale(self.box, (100,100))
-    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.openbox = pygame.transform.scale(self.openbox, (100, 100))
+    self.rect = pygame.Rect(self.x + 25,330,50,50)
     self.y = y
-
+    self.open = False
     self.colliding = False
     self.WINDOW.blit(self.box, (self.x,self.y))
 
@@ -22,26 +24,11 @@ class box():
     return self.colliding
 
   def whenClicked(self):
-    pass
+    if self.check_collision(pygame.mouse.get_pos()):
+      self.WINDOW.blit(self.openbox, (self.x-21, self.y-6))
+      self.open = True
+      pygame.display.update()
 
-class openbox():
-  def __init__(self, WINDOW,level,x=380,y=60):
-    self.WINDOW = WINDOW
-    self.level = level
-    self.x = x
-    self.box = pygame.image.load("./Objects_Level_2/openbox.png")
-    self.box = pygame.transform.scale(self.box, (400,400))
-    self.rect = pygame.Rect(self.x + 100,200,250,200)
-    self.y = y
-    self.colliding = False
-    self.WINDOW.blit(self.box, (self.x,self.y))
-
-  def check_collision(self, mouse_pos):
-    self.colliding = self.rect.collidepoint(mouse_pos)
-    return self.colliding
-
-  def whenClicked(self):
-    pass
 
 class carpet():
   def __init__(self, WINDOW,level,x=275,y=320):
@@ -79,3 +66,27 @@ class picture():
     self.y = y
     self.colliding = False
     self.WINDOW.blit(self.picture, (self.x, self.y))
+
+class scissors():
+  def __init__(self, WINDOW,level,x=355,y=430):
+    self.WINDOW = WINDOW
+    self.level = level
+    self.x = x
+    self.scissors = pygame.image.load("./Objects_Level_2/scissors.png")
+    self.scissors = pygame.transform.scale(self.scissors, (50,50))
+    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.y = y
+    self.colliding = False
+    # self.WINDOW.blit(self.scissors, (self.x, self.y))
+
+class spoon():
+  def __init__(self, WINDOW,level,x=19,y=338):
+    self.WINDOW = WINDOW
+    self.level = level
+    self.x = x
+    self.spoon = pygame.image.load("./Objects_Level_2/spoon.png")
+    self.spoon = pygame.transform.scale(self.spoon, (25,25))
+    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.y = y
+    self.colliding = False
+    # self.WINDOW.blit(self.spoon, (self.x, self.y))
