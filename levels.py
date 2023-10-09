@@ -81,6 +81,7 @@ class LVL2():
             print("You clicked me!")
           self.boxObj.whenClicked()
           self.carpetObj.whenClicked()
+          self.pictureObj.whenClicked()
           self.spoonObj.check_box(self.boxObj)
           self.scissorsObj.check_carpet(self.carpetObj)
       pygame.display.update()
