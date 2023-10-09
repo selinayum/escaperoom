@@ -77,15 +77,28 @@ class LVL2():
         if event.type == pygame.MOUSEBUTTONDOWN:
           if self.spoonObj.whenClicked(self.boxObj):
             print("You clicked me!")
+          if self.scissorsObj.whenClicked(self.carpetObj):
+            print("You clicked me!")
           self.boxObj.whenClicked()
+          self.carpetObj.whenClicked()
           self.spoonObj.check_box(self.boxObj)
+          self.scissorsObj.check_carpet(self.carpetObj)
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 
 
   def setUpLevel2(self):
     self.WINDOW.fill(Constants.BG_COLOR)
+    self.bg = pygame.image.load("./bgs/bg2.png")
+    self.WINDOW.blit(self.bg, (0, 0))
 
+    # Load Objects
+    self.boxObj = level2objects.box(self.WINDOW, self)
+    self.carpetObj = level2objects.carpet(self.WINDOW, self, 400, 320, True)
+    self.ghostObj = level2objects.ghost(self.WINDOW, self)
+    self.pictureObj = level2objects.picture(self.WINDOW, self)
+    self.scissorsObj = level2objects.scissors(self.WINDOW, self)
+    self.spoonObj = level2objects.spoon(self.WINDOW, self)
 
 class LVL3():
 
