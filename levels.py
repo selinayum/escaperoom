@@ -76,11 +76,12 @@ class LVL2():
           sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
           if self.spoonObj.whenClicked(self.boxObj):
-            print("You clicked me!")
+            print("You clicked the spoon!")
           if self.scissorsObj.whenClicked(self.carpetObj):
             print("You clicked me!")
           self.boxObj.whenClicked()
           self.carpetObj.whenClicked()
+          self.pictureObj.whenClicked()
           self.spoonObj.check_box(self.boxObj)
           self.scissorsObj.check_carpet(self.carpetObj)
       pygame.display.update()

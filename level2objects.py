@@ -74,10 +74,31 @@ class picture():
     self.x = x
     self.picture = pygame.image.load("./Objects_Level_2/picture.png")
     self.picture = pygame.transform.scale(self.picture, (200,200))
-    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.rect = pygame.Rect(self.x+10,130,170,125)
     self.y = y
     self.colliding = False
     self.WINDOW.blit(self.picture, (self.x, self.y))
+
+  def check_collision(self, mouse_pos):
+    self.colliding = self.rect.collidepoint(mouse_pos)
+    return self.colliding
+
+  def displayText(self, screen, msg, y, size, color):
+    font = pygame.font.Font("font.ttf", size + 30)
+    text = font.render(msg, 1, color)
+    text_rect = text.get_rect(center=(Constants.WIDTH / 2 + 270, y))
+    screen.blit(text, text_rect)
+    pygame.display.update()
+
+    return text
+  def whenClicked(self):
+    if self.check_collision(pygame.mouse.get_pos()):
+      pygame.draw.rect(self.WINDOW, (155, 146, 139), self.rect)
+      self.displayText(self.WINDOW,"2839",200,12,Constants.TEXT_COLOR)
+      pygame.display.update()
+
+
+
 
 class scissors():
   def __init__(self, WINDOW,level,x=355,y=430):
@@ -86,10 +107,12 @@ class scissors():
     self.x = x
     self.scissors = pygame.image.load("./Objects_Level_2/scissors.png")
     self.scissors = pygame.transform.scale(self.scissors, (50,50))
-    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.rect = pygame.Rect(self.x - 50,425,150,230)
     self.y = y
     self.colliding = False
     # self.WINDOW.blit(self.scissors, (self.x, self.y))
+
+
 
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)

@@ -52,3 +52,4 @@ class Main_menu():
     pygame.display.update()
 
     return text
+
