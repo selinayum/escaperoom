@@ -67,6 +67,8 @@ class LVL2():
     self.pictureObj = level2objects.picture(self.WINDOW,self)
     self.scissorsObj = level2objects.scissors(self.WINDOW,self)
     self.spoonObj = level2objects.spoon(self.WINDOW,self)
+    self.flowerObj = level2objects.flower(self.WINDOW, self)
+    self.KeyObj = level2objects.Key(self.WINDOW)
     self.onlevel = True
 
     while self.onlevel:
@@ -81,6 +83,7 @@ class LVL2():
             print("You clicked me!")
           self.boxObj.whenClicked()
           self.carpetObj.whenClicked()
+          self.flowerObj.whenClicked(self.KeyObj)
           self.pictureObj.whenClicked()
           self.spoonObj.check_box(self.boxObj)
           self.scissorsObj.check_carpet(self.carpetObj)

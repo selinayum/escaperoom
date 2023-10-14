@@ -149,3 +149,48 @@ class spoon():
     if box.open == True:
       self.WINDOW.blit(self.spoon, (self.x, self.y))
       pygame.display.update
+
+class flower():
+  def __init__(self, WINDOW,level,x=300,y=270):
+    self.WINDOW = WINDOW
+    self.level = level
+    self.x = x
+    self.flower = pygame.image.load("./Objects_Level_2/flowerpot.PNG")
+    self.flower = pygame.transform.scale(self.flower, (150,150))
+    self.rect = pygame.Rect(self.x + 30,300,80,40)
+    self.y = y
+    self.colliding = False
+    self.WINDOW.blit(self.flower, (self.x, self.y))
+
+  def check_collision(self, mouse_pos):
+    self.colliding = self.rect.collidepoint(mouse_pos)
+    return self.colliding
+
+  def whenClicked(self,Key):
+    if self.check_collision(pygame.mouse.get_pos()):
+      Key.spawnKey()
+
+class Key():
+  def __init__(self, WINDOW):
+
+    self.x=10
+
+    self.rect = pygame.Rect(self.x + 120, 300, 50, 50)
+    self.WINDOW = WINDOW
+    self.key = pygame.image.load("./Objects_Level_1/key.png")
+    self.vis = False
+  def whenClicked(self, flower):
+    if self.check_collision(pygame.mouse.get_pos()) and self.vis:
+      self.WINDOW.fill(Constants.WHITE)
+      main_menu_obj = Main_menu(self.WINDOW)
+      self.WINDOW.fill(Constants.BG_COLOR)
+      main_menu_obj.main_menu()
+      return True
+    return False
+  def check_collision(self, mouse_pos):
+    self.colliding = self.rect.collidepoint(mouse_pos)
+    return self.colliding
+  def spawnKey(self):
+    self.vis = True
+    self.WINDOW.blit(self.key, (1802, 305))
+    pygame.display.update()
