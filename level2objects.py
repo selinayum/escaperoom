@@ -168,6 +168,7 @@ class flower():
 
   def whenClicked(self,Key):
     if self.check_collision(pygame.mouse.get_pos()):
+      print("flower")
       Key.spawnKey()
 
 class Key():
@@ -175,11 +176,12 @@ class Key():
 
     self.x=10
 
-    self.rect = pygame.Rect(self.x + 120, 300, 50, 50)
+    self.rect = pygame.Rect(self.x + 340, 300, 50, 50)
     self.WINDOW = WINDOW
     self.key = pygame.image.load("./Objects_Level_1/key.png")
     self.vis = False
-  def whenClicked(self, flower):
+
+  def whenClicked(self):
     if self.check_collision(pygame.mouse.get_pos()) and self.vis:
       self.WINDOW.fill(Constants.WHITE)
       main_menu_obj = Main_menu(self.WINDOW)
@@ -191,6 +193,7 @@ class Key():
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
   def spawnKey(self):
+
     self.vis = True
-    self.WINDOW.blit(self.key, (1802, 305))
+    self.WINDOW.blit(self.key, (355, 305))
     pygame.display.update()
