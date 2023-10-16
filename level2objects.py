@@ -5,19 +5,23 @@ import levels
 from menu import *
 
 class box():
-  def __init__(self, WINDOW,level,x=-20,y=300):
+  def __init__(self, WINDOW,level, open = False):
     self.WINDOW = WINDOW
     self.level = level
-    self.x = x
+    self.x = -20
     self.box = pygame.image.load("./Objects_Level_2/box.png")
     self.openbox = pygame.image.load("./Objects_Level_2/openbox.png")
     self.box = pygame.transform.scale(self.box, (100,100))
     self.openbox = pygame.transform.scale(self.openbox, (100, 100))
     self.rect = pygame.Rect(self.x + 25,330,50,50)
-    self.y = y
-    self.open = False
+    self.y = 300
+    self.open = open
     self.colliding = False
     self.WINDOW.blit(self.box, (self.x,self.y))
+    if open:
+      self.WINDOW.blit(self.openbox, (self.x - 21, self.y - 6))
+      self.open = True
+      pygame.display.update()
 
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
@@ -28,6 +32,7 @@ class box():
       self.WINDOW.blit(self.openbox, (self.x-21, self.y-6))
       self.open = True
       pygame.display.update()
+
 
 
 class carpet():
@@ -68,16 +73,21 @@ class ghost():
     self.WINDOW.blit(self.ghost, (self.x, self.y))
 
 class picture():
-  def __init__(self, WINDOW,level,x=550,y=120):
+  def __init__(self, WINDOW,level, moved = False):
     self.WINDOW = WINDOW
     self.level = level
-    self.x = x
+    self.x = 550
     self.picture = pygame.image.load("./Objects_Level_2/picture.png")
     self.picture = pygame.transform.scale(self.picture, (200,200))
     self.rect = pygame.Rect(self.x+10,130,170,125)
-    self.y = y
+    self.y = 120
     self.colliding = False
     self.WINDOW.blit(self.picture, (self.x, self.y))
+    self.moved = moved
+    if moved:
+      pygame.draw.rect(self.WINDOW, (155, 146, 139), self.rect)
+      self.displayText(self.WINDOW, "2839", 200, 12, Constants.TEXT_COLOR)
+      pygame.display.update()
 
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
@@ -168,8 +178,9 @@ class flower():
 
   def whenClicked(self,Key):
     if self.check_collision(pygame.mouse.get_pos()):
-      print("flower")
-      Key.spawnKey()
+      if Key.vis == False:
+        Key.spawnKey()
+
 
 class Key():
   def __init__(self, WINDOW):
