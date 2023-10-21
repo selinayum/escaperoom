@@ -77,6 +77,10 @@ class LVL2():
           pygame.quit()
           sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
+          self.boxObj.whenClicked()
+          self.carpetObj.whenClicked()
+          self.spoonObj.check_box(self.boxObj)
+          self.scissorsObj.check_carpet(self.carpetObj)
           if self.KeyObj.whenClicked() and self.KeyObj.vis == True:
             print("Key clicked")
             if self.KeyObj.whenClicked() == True:
@@ -87,12 +91,8 @@ class LVL2():
           if self.scissorsObj.whenClicked(self.carpetObj):
             print("You clicked me!")
 
-          self.boxObj.whenClicked()
           self.flowerObj.whenClicked(self.KeyObj)
-          self.carpetObj.whenClicked()
           self.pictureObj.whenClicked()
-          self.spoonObj.check_box(self.boxObj)
-          self.scissorsObj.check_carpet(self.carpetObj)
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 
@@ -103,10 +103,10 @@ class LVL2():
     self.WINDOW.blit(self.bg, (0, 0))
 
     # Load Objects
-    self.boxObj = level2objects.box(self.WINDOW, self, True)
+    self.boxObj = level2objects.box(self.WINDOW, self, self.boxObj.open)
     self.carpetObj = level2objects.carpet(self.WINDOW, self, 400, 320, True)
     self.ghostObj = level2objects.ghost(self.WINDOW, self)
-    self.pictureObj = level2objects.picture(self.WINDOW, self, True)
+    self.pictureObj = level2objects.picture(self.WINDOW, self, self.pictureObj.moved)
     self.scissorsObj = level2objects.scissors(self.WINDOW, self)
     self.spoonObj = level2objects.spoon(self.WINDOW, self)
     self.flowerObj = level2objects.flower(self.WINDOW, self)
