@@ -103,10 +103,10 @@ class LVL2():
     self.WINDOW.blit(self.bg, (0, 0))
 
     # Load Objects
-    self.boxObj = level2objects.box(self.WINDOW, self, True)
+    self.boxObj = level2objects.box(self.WINDOW, self, self.boxObj.open)
     self.carpetObj = level2objects.carpet(self.WINDOW, self, 400, 320, True)
     self.ghostObj = level2objects.ghost(self.WINDOW, self)
-    self.pictureObj = level2objects.picture(self.WINDOW, self, True)
+    self.pictureObj = level2objects.picture(self.WINDOW, self, self.pictureObj.moved)
     self.scissorsObj = level2objects.scissors(self.WINDOW, self)
     self.spoonObj = level2objects.spoon(self.WINDOW, self)
     self.flowerObj = level2objects.flower(self.WINDOW, self)

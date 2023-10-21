@@ -103,6 +103,7 @@ class picture():
     return text
   def whenClicked(self):
     if self.check_collision(pygame.mouse.get_pos()):
+      self.moved = True
       pygame.draw.rect(self.WINDOW, (155, 146, 139), self.rect)
       self.displayText(self.WINDOW,"2839",200,12,Constants.TEXT_COLOR)
       pygame.display.update()
