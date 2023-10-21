@@ -61,17 +61,26 @@ class carpet():
 
 
 class ghost():
-  def __init__(self, WINDOW,level,x=30,y=250):
+  def __init__(self, WINDOW,level,x=30,y=250, visibility = True):
     self.WINDOW = WINDOW
     self.level = level
     self.x = x
     self.ghost = pygame.image.load("./Objects_Level_2/ghost.png")
     self.ghost = pygame.transform.scale(self.ghost, (200,200))
-    self.rect = pygame.Rect(self.x + 100,200,250,200)
+    self.rect = pygame.Rect(self.x + 50,250,100,200)
     self.y = y
     self.colliding = False
-    self.WINDOW.blit(self.ghost, (self.x, self.y))
-
+    self.visibility = visibility
+    if self.visibility:
+      self.WINDOW.blit(self.ghost, (self.x, self.y))
+  def whenClicked(self, hasscissors):
+    if self.check_collision(pygame.mouse.get_pos()) and hasscissors:
+      self.visibility = False
+      self.level.setUpLevel2()
+      pygame.display.update()
+  def check_collision(self, mouse_pos):
+    self.colliding = self.rect.collidepoint(mouse_pos)
+    return self.colliding
 class picture():
   def __init__(self, WINDOW,level, moved = False):
     self.WINDOW = WINDOW
@@ -112,7 +121,7 @@ class picture():
 
 
 class scissors():
-  def __init__(self, WINDOW,level,x=355,y=430):
+  def __init__(self, WINDOW,level,x=355,y=430, visibility = True):
     self.WINDOW = WINDOW
     self.level = level
     self.x = x
@@ -121,22 +130,34 @@ class scissors():
     self.rect = pygame.Rect(self.x - 50,425,150,230)
     self.y = y
     self.colliding = False
+    self.visibility = visibility
+
     # self.WINDOW.blit(self.scissors, (self.x, self.y))
+    if self.visibility == False:
+      self.displayText(self.WINDOW, "(Holding scissors)", 50, 12, Constants.TEXT_COLOR)
 
 
 
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
+  def displayText(self, screen, msg, y, size, color):
+    font = pygame.font.Font("font.ttf", size + 30)
+    text = font.render(msg, 1, color)
+    text_rect = text.get_rect(center=(Constants.WIDTH / 2, y))
+    screen.blit(text, text_rect)
+    pygame.display.update()
   def whenClicked(self,carpet):
     if self.check_collision(pygame.mouse.get_pos()) and carpet.moved == True:
-      print("you have the scissors!")
+      self.displayText(self.WINDOW, "(Holding scissors)", 50, 12, Constants.TEXT_COLOR)
       return True
 
+
   def check_carpet(self,carpet):
-    if carpet.moved == True:
+    if carpet.moved == True and self.visibility == True:
       self.WINDOW.blit(self.scissors, (self.x, self.y))
       pygame.display.update
+
 
 class spoon():
   def __init__(self, WINDOW,level,x=19,y=338):

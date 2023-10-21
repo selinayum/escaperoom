@@ -50,7 +50,6 @@ class LVL1():
     self.keyObj = level1objects.Key(self.WINDOW)
 
 class LVL2():
-
   def __init__(self, WINDOW):
     self.WINDOW = WINDOW
     self.WINDOW = WINDOW
@@ -70,6 +69,7 @@ class LVL2():
     self.flowerObj = level2objects.flower(self.WINDOW, self)
     self.KeyObj = level2objects.Key(self.WINDOW)
     self.onlevel = True
+    self.holding = ""
 
     while self.onlevel:
       for event in pygame.event.get():
@@ -85,12 +85,15 @@ class LVL2():
           if self.spoonObj.whenClicked(self.boxObj):
             print("You clicked the spoon!")
           if self.scissorsObj.whenClicked(self.carpetObj):
-            print("You clicked me!")
+            self.holding = "scissors"
+            self.scissorsObj.visibility = False
+            self.setUpLevel2()
 
           self.boxObj.whenClicked()
           self.flowerObj.whenClicked(self.KeyObj)
           self.carpetObj.whenClicked()
           self.pictureObj.whenClicked()
+          self.ghostObj.whenClicked(self.holding == "scissors")
           self.spoonObj.check_box(self.boxObj)
           self.scissorsObj.check_carpet(self.carpetObj)
       pygame.display.update()
@@ -105,9 +108,9 @@ class LVL2():
     # Load Objects
     self.boxObj = level2objects.box(self.WINDOW, self, self.boxObj.open)
     self.carpetObj = level2objects.carpet(self.WINDOW, self, 400, 320, True)
-    self.ghostObj = level2objects.ghost(self.WINDOW, self)
+    self.ghostObj = level2objects.ghost(self.WINDOW, self, self.ghostObj.x, self.ghostObj.y, self.ghostObj.visibility)
     self.pictureObj = level2objects.picture(self.WINDOW, self, self.pictureObj.moved)
-    self.scissorsObj = level2objects.scissors(self.WINDOW, self)
+    self.scissorsObj = level2objects.scissors(self.WINDOW, self, self.scissorsObj.x, self.scissorsObj.y, self.scissorsObj.visibility)
     self.spoonObj = level2objects.spoon(self.WINDOW, self)
     self.flowerObj = level2objects.flower(self.WINDOW, self)
 class LVL3():
