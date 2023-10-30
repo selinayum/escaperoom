@@ -33,8 +33,10 @@ class box():
     text_rect = text.get_rect(center=(Constants.WIDTH / 2, y))
     screen.blit(text, text_rect)
     pygame.display.update()
-  def whenClicked(self):
-    if self.check_collision(pygame.mouse.get_pos()):
+  def whenClicked(self, ghost):
+    if ghost.visibility == True:
+      return
+    if self.check_collision(pygame.mouse.get_pos()) and self.open == False:
       pygame.draw.rect(self.WINDOW,Constants.WHITE,pygame.Rect(250,100,250,200))
       self.displayText(self.WINDOW,"Enter Code:",140,14,Constants.TEXT_COLOR)
       codeentered=False
@@ -53,6 +55,9 @@ class box():
         self.open = True
       self.level.setUpLevel2()
       pygame.display.update()
+
+
+
 
 
 
@@ -94,9 +99,10 @@ class ghost():
     self.visibility = visibility
     if self.visibility:
       self.WINDOW.blit(self.ghost, (self.x, self.y))
-  def whenClicked(self, hasscissors):
+  def whenClicked(self, hasscissors, scissorsobj):
     if self.check_collision(pygame.mouse.get_pos()) and hasscissors:
       self.visibility = False
+      scissorsobj.visibility = True
       self.level.setUpLevel2()
       pygame.display.update()
   def check_collision(self, mouse_pos):

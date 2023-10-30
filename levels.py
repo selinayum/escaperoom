@@ -89,11 +89,11 @@ class LVL2():
             self.scissorsObj.visibility = False
             self.setUpLevel2()
 
-          self.boxObj.whenClicked()
+          self.boxObj.whenClicked(self.ghostObj)
           self.flowerObj.whenClicked(self.KeyObj)
           self.carpetObj.whenClicked()
           self.pictureObj.whenClicked()
-          self.ghostObj.whenClicked(self.holding == "scissors")
+          self.ghostObj.whenClicked(self.holding == "scissors", self.scissorsObj)
           self.spoonObj.check_box(self.boxObj)
           self.scissorsObj.check_carpet(self.carpetObj)
       pygame.display.update()
