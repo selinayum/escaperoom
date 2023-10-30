@@ -27,10 +27,31 @@ class box():
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
 
+  def displayText(self, screen, msg, y, size, color):
+    font = pygame.font.Font("font.ttf", size + 30)
+    text = font.render(msg, 1, color)
+    text_rect = text.get_rect(center=(Constants.WIDTH / 2, y))
+    screen.blit(text, text_rect)
+    pygame.display.update()
   def whenClicked(self):
     if self.check_collision(pygame.mouse.get_pos()):
-      self.WINDOW.blit(self.openbox, (self.x-21, self.y-6))
-      self.open = True
+      pygame.draw.rect(self.WINDOW,Constants.WHITE,pygame.Rect(250,100,250,200))
+      self.displayText(self.WINDOW,"Enter Code:",140,14,Constants.TEXT_COLOR)
+      codeentered=False
+      code = ""
+      while not codeentered and len(code)<4:
+        for event in pygame.event.get():
+          if event.type == pygame.KEYDOWN:
+            if str(event.unicode) != "":
+              print(event.unicode)
+              code += event.unicode
+              pygame.draw.rect(self.WINDOW, Constants.WHITE, pygame.Rect(250, 100, 250, 200))
+              self.displayText(self.WINDOW, "Enter Code:", 140, 14, Constants.TEXT_COLOR)
+              self.displayText(self.WINDOW,code,200,14,Constants.TEXT_COLOR)
+      if code == "2839":
+        self.WINDOW.blit(self.openbox, (self.x-21, self.y-6))
+        self.open = True
+      self.level.setUpLevel2()
       pygame.display.update()
 
 
