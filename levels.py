@@ -77,20 +77,21 @@ class LVL2():
           pygame.quit()
           sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-          if self.KeyObj.whenClicked() and self.KeyObj.vis == True:
-            print("Key clicked")
-            if self.KeyObj.whenClicked() == True:
-              self.onlevel=False
-              self.WINDOW.fill(Constants.BG_COLOR)
+          if self.KeyObj.whenClicked() == True and self.KeyObj.vis == True:
+            self.onlevel=False
+            self.spoonObj.vis = False
+            self.scissorsObj.vis = False
+            self.WINDOW.fill(Constants.BG_COLOR)
           if self.spoonObj.whenClicked(self.boxObj):
-            print("You clicked the spoon!")
+            self.holding = "spoon"
+            self.spoonObj.visibility = False
           if self.scissorsObj.whenClicked(self.carpetObj):
             self.holding = "scissors"
             self.scissorsObj.visibility = False
             self.setUpLevel2()
 
           self.boxObj.whenClicked(self.ghostObj)
-          self.flowerObj.whenClicked(self.KeyObj)
+          self.flowerObj.whenClicked(self.KeyObj, self.holding == "spoon")
           self.carpetObj.whenClicked()
           self.pictureObj.whenClicked()
           self.ghostObj.whenClicked(self.holding == "scissors", self.scissorsObj)
@@ -110,7 +111,7 @@ class LVL2():
     self.carpetObj = level2objects.carpet(self.WINDOW, self, 400, 320, True)
     self.ghostObj = level2objects.ghost(self.WINDOW, self, self.ghostObj.x, self.ghostObj.y, self.ghostObj.visibility)
     self.pictureObj = level2objects.picture(self.WINDOW, self, self.pictureObj.moved)
-    self.scissorsObj = level2objects.scissors(self.WINDOW, self, self.scissorsObj.x, self.scissorsObj.y, self.scissorsObj.visibility)
+    self.scissorsObj = level2objects.scissors(self.WINDOW, self, self.scissorsObj.x, self.scissorsObj.y, self.scissorsObj.vis)
     self.spoonObj = level2objects.spoon(self.WINDOW, self)
     self.flowerObj = level2objects.flower(self.WINDOW, self)
 class LVL3():

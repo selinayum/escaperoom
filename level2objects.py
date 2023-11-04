@@ -148,7 +148,7 @@ class picture():
 
 
 class scissors():
-  def __init__(self, WINDOW,level,x=355,y=430, visibility = True):
+  def __init__(self, WINDOW,level,x=355,y=430, vis= True):
     self.WINDOW = WINDOW
     self.level = level
     self.x = x
@@ -157,10 +157,10 @@ class scissors():
     self.rect = pygame.Rect(self.x - 50,425,150,230)
     self.y = y
     self.colliding = False
-    self.visibility = visibility
+    self.vis = vis
 
     # self.WINDOW.blit(self.scissors, (self.x, self.y))
-    if self.visibility == False:
+    if self.vis == False:
       self.displayText(self.WINDOW, "(Holding scissors)", 50, 12, Constants.TEXT_COLOR)
 
 
@@ -181,13 +181,13 @@ class scissors():
 
 
   def check_carpet(self,carpet):
-    if carpet.moved == True and self.visibility == True:
+    if carpet.moved == True and self.vis == True:
       self.WINDOW.blit(self.scissors, (self.x, self.y))
       pygame.display.update
 
 
 class spoon():
-  def __init__(self, WINDOW,level,x=19,y=338):
+  def __init__(self, WINDOW,level,x=19,y=338,vis=True):
     self.WINDOW = WINDOW
     self.level = level
     self.x = x
@@ -196,6 +196,7 @@ class spoon():
     self.rect = pygame.Rect(self.x -15,330,50,50)
     self.y = y
     self.colliding = False
+    self.vis = vis
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
@@ -205,9 +206,11 @@ class spoon():
       return True
 
   def check_box(self,box):
-    if box.open == True:
+    if box.open == True and self.vis:
       self.WINDOW.blit(self.spoon, (self.x, self.y))
       pygame.display.update
+
+
 
 class flower():
   def __init__(self, WINDOW,level,x=300,y=270):
@@ -225,9 +228,9 @@ class flower():
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
 
-  def whenClicked(self,Key):
+  def whenClicked(self,Key, has_spoon):
     if self.check_collision(pygame.mouse.get_pos()):
-      if Key.vis == False:
+      if Key.vis == False and has_spoon:
         Key.spawnKey()
 
 
