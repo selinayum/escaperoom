@@ -225,9 +225,9 @@ class flower():
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
 
-  def whenClicked(self,Key):
+  def whenClicked(self,Key, has_spoon):
     if self.check_collision(pygame.mouse.get_pos()):
-      if Key.vis == False:
+      if Key.vis == False and has_spoon:
         Key.spawnKey()
 
 

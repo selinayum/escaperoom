@@ -77,20 +77,19 @@ class LVL2():
           pygame.quit()
           sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-          if self.KeyObj.whenClicked() and self.KeyObj.vis == True:
-            print("Key clicked")
-            if self.KeyObj.whenClicked() == True:
-              self.onlevel=False
-              self.WINDOW.fill(Constants.BG_COLOR)
+          if self.KeyObj.whenClicked() == True and self.KeyObj.vis == True:
+            self.onlevel=False
+            self.WINDOW.fill(Constants.BG_COLOR)
           if self.spoonObj.whenClicked(self.boxObj):
-            print("You clicked the spoon!")
+            self.holding = "spoon"
+            self.spoonObj.visibility = False
           if self.scissorsObj.whenClicked(self.carpetObj):
             self.holding = "scissors"
             self.scissorsObj.visibility = False
             self.setUpLevel2()
 
           self.boxObj.whenClicked(self.ghostObj)
-          self.flowerObj.whenClicked(self.KeyObj)
+          self.flowerObj.whenClicked(self.KeyObj, self.holding == "spoon")
           self.carpetObj.whenClicked()
           self.pictureObj.whenClicked()
           self.ghostObj.whenClicked(self.holding == "scissors", self.scissorsObj)
