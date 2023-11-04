@@ -102,7 +102,7 @@ class ghost():
   def whenClicked(self, hasscissors, scissorsobj):
     if self.check_collision(pygame.mouse.get_pos()) and hasscissors:
       self.visibility = False
-      scissorsobj.visibility = True
+      scissorsobj.vis = True
       self.level.setUpLevel2()
       pygame.display.update()
   def check_collision(self, mouse_pos):
@@ -202,9 +202,15 @@ class spoon():
     return self.colliding
   def whenClicked(self,box):
     if self.check_collision(pygame.mouse.get_pos()) and box.open == True:
-      print("you have the spoon!")
+      self.vis = False
+      self.displayText(self.WINDOW, "Holding spoon", 50, 12, Constants.TEXT_COLOR)
       return True
-
+  def displayText(self, screen, msg, y, size, color):
+    font = pygame.font.Font("font.ttf", size + 30)
+    text = font.render(msg, 1, color)
+    text_rect = text.get_rect(center=(Constants.WIDTH / 2, y))
+    screen.blit(text, text_rect)
+    pygame.display.update()
   def check_box(self,box):
     if box.open == True and self.vis:
       self.WINDOW.blit(self.spoon, (self.x, self.y))

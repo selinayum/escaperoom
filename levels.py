@@ -84,10 +84,10 @@ class LVL2():
             self.WINDOW.fill(Constants.BG_COLOR)
           if self.spoonObj.whenClicked(self.boxObj):
             self.holding = "spoon"
-            self.spoonObj.visibility = False
+            self.spoonObj.vis = False
           if self.scissorsObj.whenClicked(self.carpetObj):
             self.holding = "scissors"
-            self.scissorsObj.visibility = False
+            self.scissorsObj.vis = False
             self.setUpLevel2()
 
           self.boxObj.whenClicked(self.ghostObj)
