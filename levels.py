@@ -3,6 +3,7 @@ from pygame.locals import QUIT
 import Constants
 import level1objects
 import level2objects
+import level3objects
 
 class LVL1():
 
@@ -124,6 +125,7 @@ class LVL3():
     # Setup background
     self.bg = pygame.image.load("./bgs/bg3.png")
     self.WINDOW.blit(self.bg, (0, 0))
+    self.arrow = level3objects.arrow(self.WINDOW, 3, 650, 250)
 
     self.onlevel = True
 
@@ -137,3 +139,4 @@ class LVL3():
 
   def setUpLevel3(self):
     self.WINDOW.fill(Constants.BG_COLOR)
+
