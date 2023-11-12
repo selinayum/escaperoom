@@ -116,8 +116,24 @@ class LVL2():
     self.flowerObj = level2objects.flower(self.WINDOW, self)
 class LVL3():
 
+
   def __init__(self, WINDOW):
     self.WINDOW = WINDOW
+    self.WINDOW.fill(Constants.BG_COLOR)
+
+    # Setup background
+    self.bg = pygame.image.load("./bgs/bg3.png")
+    self.WINDOW.blit(self.bg, (0, 0))
+
+    self.onlevel = True
+
+    while self.onlevel:
+      for event in pygame.event.get():
+        if event.type == QUIT:
+          pygame.quit()
+          sys.exit()
+      pygame.display.update()
+      Constants.fpsClock.tick(Constants.FPS)
 
   def setUpLevel3(self):
     self.WINDOW.fill(Constants.BG_COLOR)
