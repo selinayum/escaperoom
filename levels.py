@@ -125,7 +125,9 @@ class LVL3():
     # Setup background
     self.bg = pygame.image.load("./bgs/bg3.png")
     self.WINDOW.blit(self.bg, (0, 0))
-    self.arrow = level3objects.arrow(self.WINDOW, 3, 650, 250)
+    self.arrow_right = level3objects.arrow(self.WINDOW, 3, 650, 250)
+    self.arrow_down = level3objects.arrow(self.WINDOW, 3, 325, 390,angle=-90)
+    self.arrow_left = level3objects.arrow(self.WINDOW, 3, 10, 250,angle=180)
 
     self.onlevel = True
 
