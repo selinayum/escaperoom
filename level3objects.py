@@ -5,7 +5,7 @@ import levels
 from menu import *
 
 class arrow:
-    def __init__(self, WINDOW, level, x, y, angle = 0):
+    def __init__(self, WINDOW, level, x, y, goto, angle = 0):
         self.WINDOW = WINDOW
         self.level = level
         self.x = x
@@ -15,6 +15,7 @@ class arrow:
         self.y = y
         self.colliding = False
         self.WINDOW.blit(self.arrow, (self.x, self.y))
+        self.goto = goto
         pygame.display.update()
 
         def check_collision(self, mouse_pos):
@@ -23,6 +24,7 @@ class arrow:
 
 
         def whenClicked(self):
-            if self.check_collision(pygame.mouse.get_pos()) and self.open == False:
-                pygame.display.update()
-                pass
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.rect.collidepoint(event.pos):
+                        return self.goto

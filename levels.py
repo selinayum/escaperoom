@@ -126,8 +126,7 @@ class LVL3():
     self.bg_main = pygame.image.load("./bgs/bg3.png")
     self.bg_cave = pygame.image.load("./bgs/bg4.png")
     self.bg_well = pygame.image.load("./Objects_Level_3/well.png")
-    self.setUpLevel3(state = "main")
-
+    self.state = "main"
     self.onlevel = True
 
     while self.onlevel:
@@ -135,7 +134,7 @@ class LVL3():
         if event.type == QUIT:
           pygame.quit()
           sys.exit()
-      self.setUpLevel3(state="well")
+      self.setUpLevel3(state=self.state)
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 
@@ -143,14 +142,14 @@ class LVL3():
     self.WINDOW.fill(Constants.BG_COLOR)
     if state == "main":
       self.WINDOW.blit(self.bg_main, (0, 0))
-      self.arrow_right = level3objects.arrow(self.WINDOW, 3, 650, 250)
-      self.arrow_down = level3objects.arrow(self.WINDOW, 3, 325, 390, angle=-90)
-      self.arrow_left = level3objects.arrow(self.WINDOW, 3, 10, 250, angle=180)
+      self.arrow_right = level3objects.arrow(self.WINDOW, 3, 650, 250, "main")
+      self.arrow_down = level3objects.arrow(self.WINDOW, 3, 325, 390, "cave", angle=-90)
+      self.arrow_left = level3objects.arrow(self.WINDOW, 3, 10, 250, "well", angle=180)
     if state == "cave":
       self.WINDOW.blit(self.bg_cave, (0, 0))
-      self.arrow_up = level3objects.arrow(self.WINDOW, 3, 15, 250, angle=90)
+      self.arrow_up = level3objects.arrow(self.WINDOW, 3, 15, 250, "main", angle=90)
     if state == "well":
       self.WINDOW.fill([212, 169, 51])
       self.WINDOW.blit(self.bg_well, (0, 0))
-      self.arrow_left = level3objects.arrow(self.WINDOW, 3, 5, 250, angle=180)
+      self.arrow_leftback = level3objects.arrow(self.WINDOW, 3, 10, 250, "main", angle=180)
 
