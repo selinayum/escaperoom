@@ -148,9 +148,9 @@ class LVL3():
       self.arrow_left = level3objects.arrow(self.WINDOW, 3, 10, 250, angle=180)
     if state == "cave":
       self.WINDOW.blit(self.bg_cave, (0, 0))
-      self.arrow_up = level3objects.arrow(self.WINDOW, 3, 325, 5, angle=90)
+      self.arrow_up = level3objects.arrow(self.WINDOW, 3, 15, 250, angle=90)
     if state == "well":
       self.WINDOW.fill([212, 169, 51])
       self.WINDOW.blit(self.bg_well, (0, 0))
-      self.arrow_up = level3objects.arrow(self.WINDOW, 3, 325, 5, angle=90)
+      self.arrow_left = level3objects.arrow(self.WINDOW, 3, 5, 250, angle=180)
 
