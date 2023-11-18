@@ -125,7 +125,7 @@ class LVL3():
     # Setup background
     self.bg_main = pygame.image.load("./bgs/bg3.png")
     self.bg_cave = pygame.image.load("./bgs/bg4.png")
-    self.setUpLevel3(state = "cave")
+    self.setUpLevel3(state = "main")
 
     self.onlevel = True
 
@@ -146,4 +146,5 @@ class LVL3():
       self.arrow_left = level3objects.arrow(self.WINDOW, 3, 10, 250, angle=180)
     if state == "cave":
       self.WINDOW.blit(self.bg_cave, (0, 0))
+      self.arrow_up = level3objects.arrow(self.WINDOW, 3, 325, 5, angle=90)
 
