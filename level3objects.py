@@ -24,10 +24,11 @@ class arrow:
     def check_collision(self, mouse_pos):
         self.colliding = self.rect.collidepoint(mouse_pos)
         return self.colliding
-    def whenClicked(self):
-        for event in pygame.event.get():
+    def whenClicked(self, events):
+        for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.rect.collidepoint(event.pos):
+                    print("Clicked arrow")
                     return True
 
     def render(self, screen):

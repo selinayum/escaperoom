@@ -23,8 +23,8 @@ class Main_menu():
                      Constants.TEXT_COLOR)
     
     Constants.fpsClock.tick(Constants.FPS)
-
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
       if event.type == QUIT:
         pygame.quit()
         sys.exit()

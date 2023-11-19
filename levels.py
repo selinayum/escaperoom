@@ -142,15 +142,16 @@ class LVL3():
   
   def gameLoop(self):
     while self.onlevel:
-      for event in pygame.event.get():
+      events = pygame.event.get()
+      for event in events:
         if event.type == QUIT:
           pygame.quit()
           sys.exit()
-      self.setUpLevel3(state=self.state)
+      self.setUpLevel3(events, state=self.state)
       pygame.display.update()
       Constants.fpsClock.tick(Constants.FPS)
 
-  def setUpLevel3(self, state = "main"):
+  def setUpLevel3(self, events, state = "main"):
     self.WINDOW.fill(Constants.BG_COLOR)
     if state == "main":
       self.WINDOW.blit(self.bg_main, (0, 0))
@@ -160,11 +161,19 @@ class LVL3():
       arrows = [level3objects.arrow(self.WINDOW, 3, 650, 250, "main"), level3objects.arrow(self.WINDOW, 3, 325, 390, "cave", angle=-90), level3objects.arrow(self.WINDOW, 3, 10, 250, "well", angle=180)]
       for arrow in arrows:
         arrow.render(self.WINDOW)
+        if arrow.whenClicked(events):
+          self.state = arrow.goto
     if state == "cave":
       self.WINDOW.blit(self.bg_cave, (0, 0))
       self.arrow_up = level3objects.arrow(self.WINDOW, 3, 325, 10, "main", angle=90)
+      self.arrow_up.render(self.WINDOW)
+      if self.arrow_up.whenClicked(events):
+        self.state = self.arrow_up.goto
     if state == "well":
       self.WINDOW.fill([212, 169, 51])
       self.WINDOW.blit(self.bg_well, (0, 0))
-      self.arrow_leftback = level3objects.arrow(self.WINDOW, 3, 10, 250, "main", angle=180)
+      self.arrow_rightback = level3objects.arrow(self.WINDOW, 3, 650, 250, "main")
+      self.arrow_rightback.render(self.WINDOW)
+      if self.arrow_rightback.whenClicked(events):
+        self.state = self.arrow_rightback.goto
 
