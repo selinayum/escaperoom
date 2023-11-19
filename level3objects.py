@@ -19,7 +19,7 @@ class arrow:
         self.colliding = False
         #self.WINDOW.blit(self.arrow, (self.x, self.y))
         self.goto = goto
-        pygame.display.update()
+        #pygame.display.update()
 
     def check_collision(self, mouse_pos):
         self.colliding = self.rect.collidepoint(mouse_pos)

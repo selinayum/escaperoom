@@ -21,7 +21,7 @@ class Main_menu():
                      Constants.TEXT_COLOR)
     self.displayText(self.WINDOW, "3) Level 3", 310, 20,
                      Constants.TEXT_COLOR)
-    pygame.display.update()
+    
     Constants.fpsClock.tick(Constants.FPS)
 
     for event in pygame.event.get():
@@ -41,9 +41,10 @@ class Main_menu():
           self.currentLevel = 2
         if event.unicode == "3":
           level3 = levels.LVL3(self.WINDOW)
+          level3.gameLoop()
           print("3")
           self.currentLevel = 3
-
+    #pygame.display.update()
   def displayText(self, screen, msg, y, size, color):
     font = pygame.font.Font("font.ttf", size + 10)
     text = font.render(msg, 1, color)

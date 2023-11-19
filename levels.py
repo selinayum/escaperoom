@@ -129,6 +129,18 @@ class LVL3():
     self.state = "main"
     self.onlevel = True
 
+    """
+    while self.onlevel:
+      for event in pygame.event.get():
+        if event.type == QUIT:
+          pygame.quit()
+          sys.exit()
+      self.setUpLevel3(state=self.state)
+      #pygame.display.update()
+      Constants.fpsClock.tick(Constants.FPS)
+    """
+  
+  def gameLoop(self):
     while self.onlevel:
       for event in pygame.event.get():
         if event.type == QUIT:
