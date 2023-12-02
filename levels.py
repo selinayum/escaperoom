@@ -166,6 +166,9 @@ class LVL3():
     if state == "cave":
       self.WINDOW.blit(self.bg_cave, (0, 0))
       self.arrow_up = level3objects.arrow(self.WINDOW, 3, 325, 10, "main", angle=90)
+      self.ancient_drawing = level3objects.ancient_drawing(self.WINDOW, 3, 275, 80, "Objects_Level_3/Ancient drawing 1.png")
+      self.ancient_drawing = level3objects.ancient_drawing(self.WINDOW, 3, 150, 200,"Objects_Level_3/Ancient drawing 2.png")
+      self.ancient_drawing = level3objects.ancient_drawing(self.WINDOW, 3, 400, 200,"Objects_Level_3/Ancient drawing 3.png")
       self.arrow_up.render(self.WINDOW)
       if self.arrow_up.whenClicked(events):
         self.state = self.arrow_up.goto

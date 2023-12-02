@@ -33,3 +33,27 @@ class arrow:
 
     def render(self, screen):
         screen.blit(self.arrow, (self.x, self.y))
+
+class ancient_drawing:
+  def __init__(self, WINDOW, level, x, y, drawing, moved = False):
+    self.WINDOW = WINDOW
+    self.level = level
+    self.image = pygame.image.load(drawing)
+    self.x = x
+    self.y = y
+    self.image = pygame.transform.scale(self.image, (200, 200))
+    self.colliding = False
+    self.WINDOW.blit(self.image, (self.x, self.y))
+    self.moved = moved
+    self.rect = pygame.Rect(self.x, self.y, 28, 22)
+
+  def check_collision(self, mouse_pos):
+    self.colliding = self.rect.collidepoint(mouse_pos)
+    return self.colliding
+
+  def whenClicked(self):
+    if self.check_collision(pygame.mouse.get_pos()):
+      self.moved = True
+      pygame.draw.rect(self.WINDOW, (155, 146, 139), self.rect)
+      pygame.display.update()
+
