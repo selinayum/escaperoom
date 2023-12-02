@@ -45,7 +45,9 @@ class ancient_drawing:
     self.colliding = False
     self.WINDOW.blit(self.image, (self.x, self.y))
     self.moved = moved
-    self.rect = pygame.Rect(self.x, self.y, 28, 22)
+    self.rect = pygame.Rect(self.x+20, self.y+53, 160, 87)
+
+
 
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
@@ -53,7 +55,9 @@ class ancient_drawing:
 
   def whenClicked(self):
     if self.check_collision(pygame.mouse.get_pos()):
-      self.moved = True
-      pygame.draw.rect(self.WINDOW, (155, 146, 139), self.rect)
-      pygame.display.update()
+      print("picture was clicked")
+
+  def update(self):
+      self.whenClicked()
+
 
