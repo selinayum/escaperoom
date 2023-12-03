@@ -35,29 +35,57 @@ class arrow:
         screen.blit(self.arrow, (self.x, self.y))
 
 class ancient_drawing:
-  def __init__(self, WINDOW, level, x, y, drawing, moved = False):
+  def __init__(self, WINDOW, level, x, y, drawing, direction, moved = False):
     self.WINDOW = WINDOW
     self.level = level
     self.image = pygame.image.load(drawing)
     self.x = x
     self.y = y
+    self.direction = direction
     self.image = pygame.transform.scale(self.image, (200, 200))
     self.colliding = False
-    self.WINDOW.blit(self.image, (self.x, self.y))
     self.moved = moved
     self.rect = pygame.Rect(self.x+20, self.y+53, 160, 87)
-
+    self.change_x = 0
+    self.moving = False
+    self.move_distance = self.x + 100 * self.direction
 
 
   def check_collision(self, mouse_pos):
     self.colliding = self.rect.collidepoint(mouse_pos)
     return self.colliding
 
-  def whenClicked(self):
-    if self.check_collision(pygame.mouse.get_pos()):
-      print("picture was clicked")
+  def whenClicked(self, events):
+    for event in events:
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.check_collision(pygame.mouse.get_pos()):
+                print("picture was clicked")
+                if self.x < self.move_distance:
+                    self.moving = True
 
-  def update(self):
-      self.whenClicked()
+
+  def update(self, events):
+      self.WINDOW.blit(self.image, (self.x, self.y))
+      self.whenClicked(events)
+      self.move()
+
+
+
+  def displaytext(self, x, y, size, msg, color):
+      font = pygame.font.Font("font.ttf", size + 30)
+      text = font.render(msg, 1, color)
+      pygame.display.update()
+
+  def move(self):
+      if self.moving == True:
+          if self.x < self.move_distance and self.direction == 1:
+              self.x += 1 * self.direction
+              #self.x += self.change_x
+          elif self.x > self.move_distance and self.direction == -1:
+              self.x += 1 * self.direction
+
+          else:
+              self.moving = False
+
 
 
