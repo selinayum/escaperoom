@@ -126,6 +126,9 @@ class LVL3():
     self.bg_main = pygame.image.load("./bgs/bg3.png")
     self.bg_cave = pygame.image.load("./bgs/bg4.png")
     self.bg_well = pygame.image.load("./Objects_Level_3/well.png")
+    self.ancient_drawing1 = level3objects.ancient_drawing(self.WINDOW, 3, 275, 80,"Objects_Level_3/Ancient drawing 1.png", 1)
+    self.ancient_drawing2 = level3objects.ancient_drawing(self.WINDOW, 3, 150, 200,"Objects_Level_3/Ancient drawing 2.png", -1)
+    self.ancient_drawing3 = level3objects.ancient_drawing(self.WINDOW, 3, 400, 200,"Objects_Level_3/Ancient drawing 3.png", 1)
     self.state = "main"
     self.onlevel = True
 
@@ -166,12 +169,9 @@ class LVL3():
     if state == "cave":
       self.WINDOW.blit(self.bg_cave, (0, 0))
       self.arrow_up = level3objects.arrow(self.WINDOW, 3, 325, 10, "main", angle=90)
-      self.ancient_drawing1 = level3objects.ancient_drawing(self.WINDOW, 3, 275, 80, "Objects_Level_3/Ancient drawing 1.png")
-      self.ancient_drawing1.update()
-      self.ancient_drawing2 = level3objects.ancient_drawing(self.WINDOW, 3, 150, 200,"Objects_Level_3/Ancient drawing 2.png")
-      self.ancient_drawing2.update()
-      self.ancient_drawing3 = level3objects.ancient_drawing(self.WINDOW, 3, 400, 200,"Objects_Level_3/Ancient drawing 3.png")
-      self.ancient_drawing3.update()
+      self.ancient_drawing1.update(events)
+      self.ancient_drawing2.update(events)
+      self.ancient_drawing3.update(events)
       self.arrow_up.render(self.WINDOW)
       if self.arrow_up.whenClicked(events):
         self.state = self.arrow_up.goto
