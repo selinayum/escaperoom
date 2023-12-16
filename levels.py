@@ -126,12 +126,15 @@ class LVL3():
     self.bg_main = pygame.image.load("./bgs/bg3.png")
     self.bg_cave = pygame.image.load("./bgs/bg4.png")
     self.bg_well = pygame.image.load("./Objects_Level_3/well.png")
+    self.bg_well2 = pygame.image.load("Objects_Level_3/drainwell.png")
     self.ancient_drawing1 = level3objects.ancient_drawing(self.WINDOW, 3, 275, 80,"Objects_Level_3/Ancient drawing 1.png", 1)
     self.ancient_drawing2 = level3objects.ancient_drawing(self.WINDOW, 3, 150, 200,"Objects_Level_3/Ancient drawing 2.png", -1)
     self.ancient_drawing3 = level3objects.ancient_drawing(self.WINDOW, 3, 400, 200,"Objects_Level_3/Ancient drawing 3.png", 1)
     self.state = "main"
     self.onlevel = True
-
+    self.colorkey=[]
+    self.correctcolorkey=["blue","brown","white","black", "red","green"]
+    self.wellstate = 0
     """
     while self.onlevel:
       for event in pygame.event.get():
@@ -166,6 +169,8 @@ class LVL3():
         arrow.render(self.WINDOW)
         if arrow.whenClicked(events):
           self.state = arrow.goto
+      self.ckeys = level3objects.Color_key(self.WINDOW,3)
+      self.ckeys.render(self.WINDOW)
     if state == "cave":
       self.WINDOW.blit(self.bg_cave, (0, 0))
       self.arrow_up = level3objects.arrow(self.WINDOW, 3, 325, 10, "main", angle=90)
@@ -177,9 +182,73 @@ class LVL3():
         self.state = self.arrow_up.goto
     if state == "well":
       self.WINDOW.fill([212, 169, 51])
-      self.WINDOW.blit(self.bg_well, (0, 0))
+      if self.wellstate == 0:
+        self.WINDOW.blit(self.bg_well, (0, 0))
+      elif self.wellstate == 1:
+        self.WINDOW.blit(self.bg_well2,(0,0))
       self.arrow_rightback = level3objects.arrow(self.WINDOW, 3, 650, 250, "main")
       self.arrow_rightback.render(self.WINDOW)
       if self.arrow_rightback.whenClicked(events):
         self.state = self.arrow_rightback.goto
+      self.bluebutton = level3objects.Color_button(self.WINDOW,3,600,200,Constants.BLUE)
+      self.bluebutton.render(self.WINDOW)
+      if self.bluebutton.whenClicked(events)==None:
+        pass
+      else:
+        #print(self.bluebutton.whenClicked(events))
+        if "blue" not in self.colorkey:
+          self.colorkey.append("blue")
+        print(self.colorkey)
+      self.brownbutton = level3objects.Color_button(self.WINDOW, 3, 435, 50, Constants.BROWN)
+      self.brownbutton.render(self.WINDOW)
+      if self.brownbutton.whenClicked(events) == None:
+        pass
+      else:
+        # print(self.bluebutton.whenClicked(events))
+        if "brown" not in self.colorkey:
+          self.colorkey.append("brown")
+        print(self.colorkey)
+      self.whitebutton = level3objects.Color_button(self.WINDOW, 3, 245, 50, Constants.WHITE)
+      self.whitebutton.render(self.WINDOW)
+      if self.whitebutton.whenClicked(events) == None:
+        pass
+      else:
+        # print(self.bluebutton.whenClicked(events))
+        if "white" not in self.colorkey:
+          self.colorkey.append("white")
+        print(self.colorkey)
+      self.blackbutton = level3objects.Color_button(self.WINDOW, 3, 100, 200, Constants.BLACK)
+      self.blackbutton.render(self.WINDOW)
+      if self.blackbutton.whenClicked(events) == None:
+        pass
+      else:
+        # print(self.bluebutton.whenClicked(events))
+        if "black" not in self.colorkey:
+          self.colorkey.append("black")
+        print(self.colorkey)
+      self.redbutton = level3objects.Color_button(self.WINDOW, 3, 245, 350, Constants.RED)
+      self.redbutton.render(self.WINDOW)
+      if self.redbutton.whenClicked(events) == None:
+        pass
+      else:
+        # print(self.bluebutton.whenClicked(events))
+        if "red" not in self.colorkey:
+          self.colorkey.append("red")
+        print(self.colorkey)
+      self.greenbutton = level3objects.Color_button(self.WINDOW, 3, 435, 350, Constants.GREEN)
+      self.greenbutton.render(self.WINDOW)
+      if self.greenbutton.whenClicked(events) == None:
+        pass
+      else:
+        # print(self.bluebutton.whenClicked(events))
+        if "green" not in self.colorkey:
+          self.colorkey.append("green")
+        print(self.colorkey)
+
+      if len(self.colorkey) == len(self.correctcolorkey):
+        if self.colorkey == self.correctcolorkey and self.wellstate ==0:
+          self.wellstate = 1
+        else:
+
+          self.colorkey=[]
 

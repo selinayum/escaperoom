@@ -89,3 +89,42 @@ class ancient_drawing:
 
 
 
+
+class Color_key:
+    def __init__(self, WINDOW, level):
+        self.WINDOW = WINDOW
+        self.level = level
+        self.x = 225
+        self.y = 10
+        self.colliding = False
+        self.bluerect = [pygame.Rect(self.x, self.y, 50, 50),Constants.BLUE]
+        self.brownrect = [pygame.Rect(self.x+50, self.y, 50, 50),Constants.BROWN]
+        self.whiterect = [pygame.Rect(self.x + 100, self.y, 50, 50),Constants.WHITE]
+        self.blackrect = [pygame.Rect(self.x + 150, self.y, 50, 50),Constants.BLACK]
+        self.redrect = [pygame.Rect(self.x + 200, self.y, 50, 50),Constants.RED]
+        self.greenrect = [pygame.Rect(self.x + 250, self.y, 50, 50),Constants.GREEN]
+        self.colorrectlist = [self.bluerect,self.brownrect,self.whiterect,self.blackrect,self.redrect,self.greenrect]
+    def render(self, screen):
+        for rect in self.colorrectlist:
+            pygame.draw.rect(screen,rect[1],rect[0])
+
+class Color_button:
+    def __init__(self,WINDOW,level,x,y,color):
+        self.WINDOW = WINDOW
+        self.level= level
+        self.x = x
+        self.y = y
+        self.color = color
+        self.rect = pygame.Rect(self.x,self.y,40,25)
+    def render(self,screen):
+        pygame.draw.rect(screen,self.color,self.rect)
+
+    def check_collision(self, mouse_pos):
+        self.colliding = self.rect.collidepoint(mouse_pos)
+        return self.colliding
+
+    def whenClicked(self, events):
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.check_collision(pygame.mouse.get_pos()):
+                    return self.color
